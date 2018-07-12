@@ -36,7 +36,7 @@ public class UserService implements IUserService {
 		this.userDao.insert(user);
 		return user;
 	}
-s
+
 	@Override
 	public User userLogin(String username, String password) {
 		return this.userDao.selectByUsernameAndPassword(username, password);
