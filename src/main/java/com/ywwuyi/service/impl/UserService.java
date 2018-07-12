@@ -32,12 +32,12 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-<<<<<<< HEAD
+
 	public Admin getAdminByAdminnameAndPassword(String adminame, String password) {
 		return this.adminDao.selectByAdminnameAndPassword(adminame, password);
 	}
 }			
-=======
+
 	public User userInsert(User user) {
 		this.userDao.insert(user);
 		return user;
@@ -48,4 +48,4 @@ public class UserService implements IUserService {
 		return this.userDao.selectByUsernameAndPassword(username, password);
 	}
 }
->>>>>>> 328ffc0a1f1b4ed1e3a55bc61ad3da12899ce271
+
