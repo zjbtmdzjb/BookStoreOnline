@@ -1,5 +1,7 @@
 package com.ywwuyi.service;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.ywwuyi.domain.*;
 
 public interface IUserService {
@@ -8,4 +10,8 @@ public interface IUserService {
 	public Admin getAdminByAdminname(String adminname);
 	
 	public User getUserByUsername(String username);
+	
+	public User userInsert(User user);
+	
+	public User userLogin(@Param("username")String username, @Param("password")String password);
 }

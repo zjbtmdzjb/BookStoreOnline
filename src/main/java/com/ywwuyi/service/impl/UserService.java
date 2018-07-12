@@ -24,10 +24,21 @@ public class UserService implements IUserService {
 	public Admin getAdminByAdminname(String adminname) {
 		return this.adminDao.selectByAdminname(adminname);
 	}
-	
+
 	@Override
 	public User getUserByUsername(String username) {
 		// TODO 自动生成的方法存根
 		return this.userDao.selectByUsername(username);
+	}
+
+	@Override
+	public User userInsert(User user) {
+		this.userDao.insert(user);
+		return user;
+	}
+s
+	@Override
+	public User userLogin(String username, String password) {
+		return this.userDao.selectByUsernameAndPassword(username, password);
 	}
 }
