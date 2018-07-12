@@ -16,4 +16,10 @@ public class UserService implements IUserService {
     public User getUserById(int userId) {
         return this.userDao.selectByPrimaryKey(userId);
     }
+
+	@Override
+	public User getUserByUsername(String username) {
+		// TODO 自动生成的方法存根
+		return this.userDao.selectByUsername(username);
+	}
 }
