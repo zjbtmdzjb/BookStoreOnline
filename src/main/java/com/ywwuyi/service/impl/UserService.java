@@ -30,13 +30,7 @@ public class UserService implements IUserService {
 		// TODO 自动生成的方法存根
 		return this.userDao.selectByUsername(username);
 	}
-
-	@Override
-
-	public Admin getAdminByAdminnameAndPassword(String adminame, String password) {
-		return this.adminDao.selectByAdminnameAndPassword(adminame, password);
-	}
-}			
+		
 
 	public User userInsert(User user) {
 		this.userDao.insert(user);
@@ -46,6 +40,11 @@ public class UserService implements IUserService {
 	@Override
 	public User userLogin(String username, String password) {
 		return this.userDao.selectByUsernameAndPassword(username, password);
+	}
+
+	@Override
+	public Admin adminLogin(String adminame, String password) {
+		return this.adminDao.selectByAdminnameAndPassword(adminame, password);
 	}
 }
 

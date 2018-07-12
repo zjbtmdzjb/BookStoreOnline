@@ -12,7 +12,7 @@ public interface IUserService {
 	public User getUserByUsername(String username);
 	
 
-	public Admin getAdminByAdminnameAndPassword(@Param("username")String adminame, @Param("password")String password);
+	public Admin adminLogin(@Param("username")String adminame, @Param("password")String password);
 
 	public User userInsert(User user);
 	

@@ -1,5 +1,7 @@
 package com.ywwuyi.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.ywwuyi.domain.Admin;
 
 public interface AdminMapper {
