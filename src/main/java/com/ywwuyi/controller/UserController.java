@@ -38,9 +38,11 @@ public class UserController {
     @ResponseBody // 要返回json数据
     public Map<String, Object> login(HttpSession httpSession) {
         Map<String, Object> map = new HashMap<String, Object>();
+        User user = this.userService.getUserById(1);
+        String username = user.getUsername();
         try {
           map.put("errorCode", 0);
-          map.put("message", "hello world");
+          map.put("message", username);
         } catch (Exception e) {
             map.put("errorCode", 1);
             map.put("errorMessage", "未知错误");
