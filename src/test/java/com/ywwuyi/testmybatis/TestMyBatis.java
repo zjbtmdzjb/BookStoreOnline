@@ -22,7 +22,7 @@ public class TestMyBatis {
 
     @Test
     public void test() {
-        User user = userService.getUserById(1);
+        User user = userService.getUserByUsername("ywwuyi");
         logger.info(user);
         logger.info("user转为json");
         logger.info(JSON.toJSONString(user));

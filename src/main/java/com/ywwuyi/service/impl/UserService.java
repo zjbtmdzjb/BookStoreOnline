@@ -21,7 +21,14 @@ public class UserService implements IUserService {
         return this.userDao.selectByPrimaryKey(userId);
     }
 
+<<<<<<< HEAD
 	public Admin getAdminByAdminname(String adminname) {
 		return this.adminDao.selectByAdminname(adminname);
+=======
+	@Override
+	public User getUserByUsername(String username) {
+		// TODO 自动生成的方法存根
+		return this.userDao.selectByUsername(username);
+>>>>>>> 48f881c15588589645da8819c966131a05e9d486
 	}
 }
