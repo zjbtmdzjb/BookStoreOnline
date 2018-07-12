@@ -35,4 +35,4 @@ public class UserService implements IUserService {
 	public Admin getAdminByAdminnameAndPassword(String adminame, String password) {
 		return this.adminDao.selectByAdminnameAndPassword(adminame, password);
 	}
-}
+}			
