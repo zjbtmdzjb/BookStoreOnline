@@ -29,9 +29,10 @@ public class UserController {
     
     @RequestMapping(value = "showUser",method = RequestMethod.GET)
     @ResponseBody
-    public User toIndex(HttpSession httpSession) {
-        User user = this.userService.getUserById(1);
-        return user;
+    public Admin toIndex(HttpSession httpSession) {
+    	String adminname = "sha";
+        Admin admin = this.userService.getAdminByAdminname(adminname);
+        return admin;
     }
     
     @RequestMapping(value = "hello", method = RequestMethod.GET) 
