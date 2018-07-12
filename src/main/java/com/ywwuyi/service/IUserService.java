@@ -4,4 +4,7 @@ import com.ywwuyi.domain.*;
 
 public interface IUserService {
 	public User getUserById(int Id);
+	
+	public Admin getAdminByAdminname(String adminname);
+	
 }
