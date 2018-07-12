@@ -16,4 +16,7 @@ public interface AdminMapper {
     int updateByPrimaryKey(Admin record);
     
     Admin selectByAdminname(String adminame);
+    
+    Admin selectByAdminnameAndPassword(@Param("name")String adminame, @Param("password")String password);
+
 }
