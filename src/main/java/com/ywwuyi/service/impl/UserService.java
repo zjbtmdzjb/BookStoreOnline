@@ -95,5 +95,21 @@ public class UserService implements IUserService {
 		this.orderDao.insert(order);
 		return order;
 	}
+
+	@Override
+	public Integer bookUpdata(Book record) {
+		return this.bookDao.updateByPrimaryKeySelective(record);
+	}
+
+	@Override
+	public Integer bookcommitUpdata(Bookcommit record) {
+		return this.bookcommitDao.updateByPrimaryKeySelective(record);
+	}
+
+	@Override
+	public Integer orderUpdata(Order record) {
+		return this.orderDao.updateByPrimaryKeySelective(record);
+	}
+
 }
 

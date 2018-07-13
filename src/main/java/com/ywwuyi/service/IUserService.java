@@ -33,5 +33,10 @@ public interface IUserService {
 	public Book bookInsert(Book book);
 
 	public Order orderInsert(Order order);
-
+	
+	public Integer bookUpdata(Book record);
+	
+	public Integer bookcommitUpdata(Bookcommit record);
+	
+	public Integer orderUpdata(Order record);
 }
