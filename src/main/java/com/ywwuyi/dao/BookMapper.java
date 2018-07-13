@@ -10,8 +10,6 @@ public interface BookMapper {
     int insertSelective(Book record);
 
     Book selectByPrimaryKey(Integer id);
-    
-    Book selectByBookName(String bookname);
 
     int updateByPrimaryKeySelective(Book record);
 

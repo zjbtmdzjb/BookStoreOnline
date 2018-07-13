@@ -8,9 +8,10 @@
     <result column="image" property="image" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="date" property="date" jdbcType="DATE" />
+    <result column="cost" property="cost" jdbcType="DOUBLE" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, bookname, presentation, image, type, date
+    id, bookname, presentation, image, type, date, cost
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -18,23 +19,17 @@
     from book
     where id = #{id,jdbcType=INTEGER}
   </select>
-  
-  <select id="selectByBookName" resultMap="BaseResultMap" parameterType="java.lang.Varchar" >
-    select 
-    <include refid="Base_Column_List" />
-    from book
-    where bookname = #{bookname,jdbcType=VARCHAR}
-  </select>
-  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from book
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ywwuyi.domain.Book" >
     insert into book (id, bookname, presentation, 
-      image, type, date)
+      image, type, date, cost
+      )
     values (#{id,jdbcType=INTEGER}, #{bookname,jdbcType=VARCHAR}, #{presentation,jdbcType=VARCHAR}, 
-      #{image,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{date,jdbcType=DATE})
+      #{image,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{date,jdbcType=DATE}, #{cost,jdbcType=DOUBLE}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.ywwuyi.domain.Book" >
     insert into book
@@ -57,6 +52,9 @@
       <if test="date != null" >
         date,
       </if>
+      <if test="cost != null" >
+        cost,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -76,6 +74,9 @@
       </if>
       <if test="date != null" >
         #{date,jdbcType=DATE},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
@@ -97,6 +98,9 @@
       <if test="date != null" >
         date = #{date,jdbcType=DATE},
       </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=DOUBLE},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -106,7 +110,8 @@
       presentation = #{presentation,jdbcType=VARCHAR},
       image = #{image,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR},
-      date = #{date,jdbcType=DATE}
+      date = #{date,jdbcType=DATE},
+      cost = #{cost,jdbcType=DOUBLE}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

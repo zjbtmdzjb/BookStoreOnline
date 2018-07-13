@@ -15,6 +15,8 @@ public class Book {
 
     private Date date;
 
+    private Double cost;
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +63,13 @@ public class Book {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Double getCost() {
+        return cost;
+    }
+
+    public void setCost(Double cost) {
+        this.cost = cost;
     }
 }
