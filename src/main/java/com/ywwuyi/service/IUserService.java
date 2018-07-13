@@ -27,4 +27,11 @@ public interface IUserService {
 	public Integer adminDelete(Integer id);
 	
 	public Integer userDelete(Integer id);
+	
+	public Bookcommit bookcommitInsert(Bookcommit bookcommit);
+	
+	public Book bookInsert(Book book);
+
+	public Order orderInsert(Order order);
+
 }

@@ -81,5 +81,19 @@ public class UserService implements IUserService {
 		return id;
 	}
 
+	public Bookcommit bookcommitInsert(Bookcommit bookcommit) {
+		this.bookcommitDao.insert(bookcommit);
+		return bookcommit;
+	}
+		
+	public Book bookInsert(Book book) {
+		this.bookDao.insert(book);
+		return book;
+	}
+		
+	public Order orderInsert(Order order) {
+		this.orderDao.insert(order);
+		return order;
+	}
 }
 
