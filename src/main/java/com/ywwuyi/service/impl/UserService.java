@@ -1,6 +1,8 @@
 package com.ywwuyi.service.impl;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -91,7 +93,7 @@ public class UserService implements IUserService {
 		return book;
 	}
 	
-	public Book getBookByBookName(String bookname) {
+	public List<Map<String,String>> getBookByBookName(String bookname) {
 		return bookDao.selectByBookName(bookname);
 	}
 		

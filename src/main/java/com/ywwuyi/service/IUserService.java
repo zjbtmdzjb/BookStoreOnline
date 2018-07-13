@@ -1,6 +1,8 @@
 package com.ywwuyi.service;
 
 import org.apache.ibatis.annotations.Param;
+import java.util.List;
+import java.util.Map;
 
 import com.ywwuyi.domain.*;
 
@@ -34,7 +36,7 @@ public interface IUserService {
 	
 	public Book bookInsert(Book book);
 	
-	public Book getBookByBookName(String bookname);
+	public List<Map<String,String>> getBookByBookName(String bookname);
 
 	public Order orderInsert(Order order);
 	

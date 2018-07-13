@@ -1,5 +1,7 @@
 package com.ywwuyi.dao;
 
+import java.util.List;
+import java.util.Map;
 import com.ywwuyi.domain.Book;
 
 public interface BookMapper {
@@ -11,7 +13,7 @@ public interface BookMapper {
 
     Book selectByPrimaryKey(Integer id);
     
-    Book selectByBookName(String bookname);
+    List<Map<String,String>> selectByBookName(String bookname);
 
     int updateByPrimaryKeySelective(Book record);
 
