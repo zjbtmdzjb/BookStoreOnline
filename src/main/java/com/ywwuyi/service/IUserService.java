@@ -45,4 +45,6 @@ public interface IUserService {
 	public Integer bookcommitUpdata(Bookcommit record);
 	
 	public Integer orderUpdata(Order record);
+	
+	public Integer sum(Integer userid);
 }
