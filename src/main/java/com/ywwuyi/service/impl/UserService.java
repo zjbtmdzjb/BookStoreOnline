@@ -123,5 +123,9 @@ public class UserService implements IUserService {
 		return this.orderDao.updateByPrimaryKeySelective(record);
 	}
 
+	@Override
+	public Integer sum(Integer userid) {
+		return this.orderDao.sum(userid);
+	}
 }
 
