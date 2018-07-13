@@ -40,4 +40,9 @@ public interface IUserService {
 	
 	public Order getOrderByBookId(Integer bookid);
 
+	public Integer bookUpdata(Book record);
+	
+	public Integer bookcommitUpdata(Bookcommit record);
+	
+	public Integer orderUpdata(Order record);
 }
