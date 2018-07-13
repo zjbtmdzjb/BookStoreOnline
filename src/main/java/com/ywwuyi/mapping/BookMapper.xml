@@ -24,7 +24,9 @@
     select 
     <include refid="Base_Column_List" />
     from book
-    where bookname = #{bookname,jdbcType=VARCHAR}
+    <if test="bookname != null and bookname != ''">
+    where bookname like "%"#{bookname,jdbcType=VARCHAR}"%"
+    </if>
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
