@@ -15,7 +15,12 @@ public class UserService implements IUserService {
     private UserMapper userDao;
     @Autowired
     private AdminMapper adminDao;
-    
+    @Autowired
+    private OrderMapper orderDao;
+    @Autowired
+    private BookMapper bookDao;
+    @Autowired
+    private BookcommitMapper bookcommitDao;
 
     public User getUserById(int userId) {
         return this.userDao.selectByPrimaryKey(userId);
@@ -27,7 +32,6 @@ public class UserService implements IUserService {
 
 	@Override
 	public User getUserByUsername(String username) {
-		// TODO 自动生成的方法存根
 		return this.userDao.selectByUsername(username);
 	}
 		
@@ -46,5 +50,36 @@ public class UserService implements IUserService {
 	public Admin adminLogin(String adminame, String password) {
 		return this.adminDao.selectByAdminnameAndPassword(adminame, password);
 	}
+
+	@Override
+	public Integer orderDelete(Integer id) {
+		this.orderDao.deleteByPrimaryKey(id);
+		return id;
+	}
+
+	@Override
+	public Integer bookDelete(Integer id) {
+		this.bookDao.deleteByPrimaryKey(id);
+		return id;
+	}
+
+	@Override
+	public Integer bookcommitDelete(Integer id) {
+		this.bookcommitDao.deleteByPrimaryKey(id);
+		return id;
+	}
+
+	@Override
+	public Integer adminDelete(Integer id) {
+		this.adminDao.deleteByPrimaryKey(id);
+		return id;
+	}
+
+	@Override
+	public Integer userDelete(Integer id) {
+		this.userDao.deleteByPrimaryKey(id);
+		return id;
+	}
+
 }
 

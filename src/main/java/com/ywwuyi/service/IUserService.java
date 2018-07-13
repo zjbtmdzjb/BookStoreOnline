@@ -18,4 +18,13 @@ public interface IUserService {
 	
 	public User userLogin(@Param("username")String username, @Param("password")String password);
 
+	public Integer orderDelete(Integer id);
+	
+	public Integer bookDelete(Integer id);
+	
+	public Integer bookcommitDelete(Integer id);
+	
+	public Integer adminDelete(Integer id);
+	
+	public Integer userDelete(Integer id);
 }
