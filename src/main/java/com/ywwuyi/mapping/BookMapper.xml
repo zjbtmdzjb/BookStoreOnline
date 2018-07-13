@@ -18,6 +18,14 @@
     from book
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <select id="selectByBookName" resultMap="BaseResultMap" parameterType="java.lang.Varchar" >
+    select 
+    <include refid="Base_Column_List" />
+    from book
+    where bookname = #{bookname,jdbcType=VARCHAR}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from book
     where id = #{id,jdbcType=INTEGER}

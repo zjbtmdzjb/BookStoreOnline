@@ -10,7 +10,9 @@ public interface BookcommitMapper {
     int insertSelective(Bookcommit record);
 
     Bookcommit selectByPrimaryKey(Integer id);
-
+    
+    Bookcommit selectByBookId(Integer bookid);
+    
     int updateByPrimaryKeySelective(Bookcommit record);
 
     int updateByPrimaryKey(Bookcommit record);

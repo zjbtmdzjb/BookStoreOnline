@@ -85,15 +85,29 @@ public class UserService implements IUserService {
 		this.bookcommitDao.insert(bookcommit);
 		return bookcommit;
 	}
-		
+	
 	public Book bookInsert(Book book) {
 		this.bookDao.insert(book);
 		return book;
+	}
+	
+	public Book getBookByBookName(String bookname) {
+		return bookDao.selectByBookName(bookname);
 	}
 		
 	public Order orderInsert(Order order) {
 		this.orderDao.insert(order);
 		return order;
 	}
+	
+	public Order getOrderByBookId(Integer bookid) {
+		return this.orderDao.selectByBookId(bookid);
+	}
+
+	@Override
+	public Bookcommit getBookcommitByBookcommitId(Integer bookid) {
+		return this.bookcommitDao.selectByBookId(bookid);
+	}
+
 }
 

@@ -30,8 +30,14 @@ public interface IUserService {
 	
 	public Bookcommit bookcommitInsert(Bookcommit bookcommit);
 	
+	public Bookcommit getBookcommitByBookcommitId(Integer bookid);
+	
 	public Book bookInsert(Book book);
+	
+	public Book getBookByBookName(String bookname);
 
 	public Order orderInsert(Order order);
+	
+	public Order getOrderByBookId(Integer bookid);
 
 }
