@@ -20,12 +20,21 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   
-  <select id="selectByBookName" resultMap="BaseResultMap" parameterType="java.lang.Varchar" >
+  <select id="selectByBookName" resultMap="BaseResultMap" parameterType="String" >
     select 
     <include refid="Base_Column_List" />
     from book
     <if test="bookname != null and bookname != ''">
     where bookname like "%"#{bookname,jdbcType=VARCHAR}"%"
+    </if>
+  </select>
+  
+  <select id="selectByBookType" resultMap="BaseResultMap" parameterType="String" >
+    select 
+    <include refid="Base_Column_List" />
+    from book
+    <if test="type != null and type != ''">
+    where type like "%"#{type,jdbcType=VARCHAR}"%"
     </if>
   </select>
   

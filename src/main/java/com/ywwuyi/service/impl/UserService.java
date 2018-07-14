@@ -96,6 +96,10 @@ public class UserService implements IUserService {
 	public List<Map<String,String>> getBookByBookName(String bookname) {
 		return bookDao.selectByBookName(bookname);
 	}
+	
+	public List<Map<String,String>> getBookByBookType(String type) {
+		return bookDao.selectByBookType(type)
+	}
 		
 	public Order orderInsert(Order order) {
 		this.orderDao.insert(order);

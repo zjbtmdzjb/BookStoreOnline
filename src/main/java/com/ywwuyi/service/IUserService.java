@@ -37,6 +37,8 @@ public interface IUserService {
 	public Book bookInsert(Book book);
 	
 	public List<Map<String,String>> getBookByBookName(String bookname);
+	
+	public List<Map<String,String>> getBookByBookType(String type);
 
 	public Order orderInsert(Order order);
 	
