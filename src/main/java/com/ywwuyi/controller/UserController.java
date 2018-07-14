@@ -57,20 +57,4 @@ public class UserController {
     	regis.setEmail(email);
     	return this.userService.userInsert(regis);
     }
-    
-    @RequestMapping(value = "hello", method = RequestMethod.GET) 
-    @ResponseBody // 要返回json数据
-    public Map<String, Object> login(HttpSession httpSession) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        User user = this.userService.getUserById(1);
-        String username = user.getUsername();
-        try {
-          map.put("errorCode", 0);
-          map.put("message", username);
-        } catch (Exception e) {
-            map.put("errorCode", 1);
-            map.put("errorMessage", "未知错误");
-        }
-        return map;
-    }
 }
