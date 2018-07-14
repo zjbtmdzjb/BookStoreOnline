@@ -49,8 +49,8 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public Admin adminLogin(String adminame, String password) {
-		return this.adminDao.selectByAdminnameAndPassword(adminame, password);
+	public Admin adminLogin(String adminname, String password) {
+		return this.adminDao.selectByAdminnameAndPassword(adminname, password);
 	}
 
 	@Override

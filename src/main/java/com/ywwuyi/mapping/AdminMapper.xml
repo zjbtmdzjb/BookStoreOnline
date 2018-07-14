@@ -27,7 +27,7 @@
     select 
     <include refid="Base_Column_List" />
     from admin
-    where adminame = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+    where adminname = #{adminname,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
   </select>
 
   
