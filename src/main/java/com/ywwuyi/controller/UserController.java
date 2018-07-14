@@ -36,6 +36,7 @@ public class UserController {
         return admin;
     }
     
+<<<<<<< HEAD
     @RequestMapping(value = "userlogin.action",method = RequestMethod.POST)
     @ResponseBody
     public User login(@RequestBody Map<String,String> map) {
@@ -56,5 +57,22 @@ public class UserController {
     	regis.setPassword(password);
     	regis.setEmail(email);
     	return this.userService.userInsert(regis);
+=======
+    
+    @RequestMapping(value = "hello", method = RequestMethod.GET) 
+    @ResponseBody // 要返回json数据
+    public Map<String, Object> login(HttpSession httpSession) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        User user = this.userService.getUserById(1);
+        String username = user.getUsername();
+        try {
+          map.put("errorCode", 0);
+          map.put("message", username);
+        } catch (Exception e) {
+            map.put("errorCode", 1);
+            map.put("errorMessage", "未知错误");
+        }
+        return map;
+>>>>>>> 427e6935e8b15bb9082eed37b19ada9e44fffefc
     }
 }
