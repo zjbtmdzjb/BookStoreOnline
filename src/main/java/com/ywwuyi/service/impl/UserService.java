@@ -39,6 +39,9 @@ public class UserService implements IUserService {
 		
 
 	public User userInsert(User user) {
+		if(this.userDao.selectByUsername(user.getUsername()) != null) {
+			return null;
+		}
 		this.userDao.insert(user);
 		return user;
 	}
@@ -98,7 +101,7 @@ public class UserService implements IUserService {
 	}
 	
 	public List<Map<String,String>> getBookByBookType(String type) {
-		return bookDao.selectByBookType(type)
+		return bookDao.selectByBookType(type);
 	}
 		
 	public Order orderInsert(Order order) {
