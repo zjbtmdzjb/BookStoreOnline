@@ -2,6 +2,8 @@ package com.ywwuyi.domain;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Book {
     private Integer id;
 
@@ -16,6 +18,8 @@ public class Book {
     private Date date;
 
     private Double cost;
+    
+    private MultipartFile file;
 
     public Integer getId() {
         return id;
@@ -72,4 +76,12 @@ public class Book {
     public void setCost(Double cost) {
         this.cost = cost;
     }
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 }
