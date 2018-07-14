@@ -14,7 +14,7 @@ public interface IUserService {
 	public User getUserByUsername(String username);
 	
 
-	public Admin adminLogin(@Param("username")String adminname, @Param("password")String password);
+	public Admin adminLogin(@Param("adminname")String adminname, @Param("password")String password);
 
 	public User userInsert(User user);
 	

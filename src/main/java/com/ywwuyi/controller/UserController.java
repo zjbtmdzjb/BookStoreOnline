@@ -36,6 +36,7 @@ public class UserController {
         return admin;
     }
     
+    
     @RequestMapping(value = "hello", method = RequestMethod.GET) 
     @ResponseBody // 要返回json数据
     public Map<String, Object> login(HttpSession httpSession) {
