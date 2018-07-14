@@ -36,7 +36,6 @@ public class UserController {
         return admin;
     }
     
-<<<<<<< HEAD
     @RequestMapping(value = "userlogin.action",method = RequestMethod.POST)
     @ResponseBody
     public User login(@RequestBody Map<String,String> map) {
@@ -57,7 +56,7 @@ public class UserController {
     	regis.setPassword(password);
     	regis.setEmail(email);
     	return this.userService.userInsert(regis);
-=======
+    }
     
     @RequestMapping(value = "hello", method = RequestMethod.GET) 
     @ResponseBody // 要返回json数据
@@ -73,6 +72,5 @@ public class UserController {
             map.put("errorMessage", "未知错误");
         }
         return map;
->>>>>>> 427e6935e8b15bb9082eed37b19ada9e44fffefc
     }
 }
