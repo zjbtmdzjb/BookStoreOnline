@@ -57,9 +57,9 @@ public class AdminController {
     	return jsonStr;
     }
     
-    @RequestMapping(value = "orderlist",method = RequestMethod.POST,produces = { "application/json;charset=UTF-8" })
+    @RequestMapping(value = "orderlist",method = RequestMethod.GET)
     @ResponseBody
-    public String userList(@RequestBody Map<String,String> map) {
+    public String orderList(HttpSession httpSession) {
     	List<Map<String, String>> lists = this.userService.getAllOrder();
     	String jsonStr = JSONArray.toJSONString(lists);
     	return jsonStr;
