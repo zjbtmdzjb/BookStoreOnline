@@ -39,6 +39,14 @@ public class BookController {
     	return null;
     }
     
+    @RequestMapping(value = "deleteBook.action",method = RequestMethod.POST)
+    @ResponseBody
+    public Integer delete(@RequestBody Map<String,String> map) {
+    	String id = map.get("id");
+    	int i = Integer.parseInt(id);
+    	return this.userService.bookDelete(i);
+    }
+    
     @RequestMapping(value = "addNewbook.action")
     @ResponseBody
     public Book addNewbook(Book book, HttpServletRequest request) {

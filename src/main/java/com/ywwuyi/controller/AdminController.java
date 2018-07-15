@@ -37,5 +37,13 @@ public class AdminController {
     	return admin;
     }
     
+    @RequestMapping(value = "deleteAdmin.action",method = RequestMethod.POST)
+    @ResponseBody
+    public Integer delete(@RequestBody Map<String,String> map) {
+    	String id = map.get("id");
+    	int i = Integer.parseInt(id);
+    	return this.userService.adminDelete(i);
+    }
+    
 
 }

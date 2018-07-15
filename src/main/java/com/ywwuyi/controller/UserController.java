@@ -45,6 +45,14 @@ public class UserController {
     	return user;
     }
     
+    @RequestMapping(value = "deleteUser.action",method = RequestMethod.POST)
+    @ResponseBody
+    public Integer delete(@RequestBody Map<String,String> map) {
+    	String id = map.get("id");
+    	int i = Integer.parseInt(id);
+    	return this.userService.userDelete(i);
+    }
+    
     @RequestMapping(value = "userregister.action", method = RequestMethod.POST)
     @ResponseBody
     public User register(@RequestBody Map<String,String> map) {
