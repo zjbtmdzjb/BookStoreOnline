@@ -105,6 +105,10 @@ public class UserService implements IUserService {
 	public List<Map<String,String>> getBookByBookType(String type) {
 		return bookDao.selectByBookType(type);
 	}
+	
+	public List<Map<String,String>> getBookByBookCost(Integer min,Integer max) {
+		return bookDao.selectByBookCost(min,max);
+	}
 		
 	public Order orderInsert(Order order) {
 		this.orderDao.insert(order);

@@ -2,6 +2,9 @@ package com.ywwuyi.dao;
 
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.ywwuyi.domain.Book;
 
 public interface BookMapper {
@@ -18,6 +21,8 @@ public interface BookMapper {
     List<Map<String,String>> selectByBookType(String type);
     
     List<Map<String,String>> selectAllBook();
+    
+    List<Map<String,String>> selectByBookCost(@Param("min")Integer min,@Param("max")Integer max);
 
     int updateByPrimaryKeySelective(Book record);
 

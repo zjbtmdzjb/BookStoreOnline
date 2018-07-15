@@ -38,6 +38,15 @@
     </if>
   </select>
   
+  <select id="selectByBookCost" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from book
+    <![CDATA[
+   		where cost>= #{min,jdbcType=INTEGER} and cost <= #{max,jdbcType=INTEGER}
+   		]]>
+  </select>
+  
   <select id="selectAllBook" resultMap="BaseResultMap" >
     select all
     <include refid="Base_Column_List" />
