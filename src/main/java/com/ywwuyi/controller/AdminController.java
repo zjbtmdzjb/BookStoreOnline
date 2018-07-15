@@ -1,5 +1,6 @@
 package com.ywwuyi.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,13 +43,47 @@ public class AdminController {
 
     @RequestMapping(value = "deleteAdmin.action",method = RequestMethod.POST)
     @ResponseBody
-    public Integer delete(@RequestBody Map<String,String> map) {
+    public Integer deleteadmin(@RequestBody Map<String,String> map) {
     	String id = map.get("id");
     	int i = Integer.parseInt(id);
     	return this.userService.adminDelete(i);
     }
     
-
+    @RequestMapping(value = "Order.action", method = RequestMethod.POST)
+    @ResponseBody
+    public Order review(@RequestBody Map<String,String> map) {
+    	String id = map.get("id");
+    	String userid = map.get("userid");
+    	String bookid = map.get("bookid");
+    	Order regis = new Order();
+    	int i = Integer.parseInt(id);
+    	int ui = Integer.parseInt(userid);
+    	int bi = Integer.parseInt(bookid);
+    	Date nowDate = new Date();
+    	regis.setId(i);
+    	regis.setUserid(ui);
+    	regis.setBookid(bi);
+    	regis.setDate(nowDate);
+    	return this.userService.orderInsert(regis);
+    }
+    
+    @RequestMapping(value = "selectOrder.action", method = RequestMethod.POST)
+    @ResponseBody
+    public String selectorder(@RequestBody Map<String,String> map) {
+    	String userid = map.get("userid");
+    	int i = Integer.parseInt(userid);
+    	List<Map<String,String>> lists = this.userService.getOrderByUserId(i);
+    	String jsonStr = JSONArray.toJSONString(lists);
+    	return jsonStr;
+    }
+    
+    @RequestMapping(value = "deleteOrder.action",method = RequestMethod.POST)
+    @ResponseBody
+    public Integer deleteorder(@RequestBody Map<String,String> map) {
+    	String id = map.get("id");
+    	int i = Integer.parseInt(id);
+    	return this.userService.orderDelete(i);
+    }
 
     @RequestMapping(value = "adminlist",method = RequestMethod.GET,produces = { "application/json;charset=UTF-8" })
     @ResponseBody
