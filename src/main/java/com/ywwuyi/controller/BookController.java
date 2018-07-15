@@ -106,6 +106,14 @@ public class BookController {
     	return jsonStr;
     }
     
+    @RequestMapping(value = "selectBookid.action", produces = { "application/json;charset=UTF-8" })
+    @ResponseBody
+    public Book selectbookid(@RequestBody Map<String,String> map) {
+    	String id = map.get("id");
+    	Book book = this.userService.getBookById(Integer.parseInt(id));
+    	return book;
+    }
+    
     @RequestMapping(value = "addNewbook.action",produces = { "application/json;charset=UTF-8" })
     @ResponseBody
     public Book addNewbook(@RequestBody Map<String,String> map) {
@@ -144,7 +152,6 @@ public class BookController {
         String suffixName = contentType.substring(contentType.indexOf("/")+1);  
         //得到 文件名  
         filename=uuid+"."+suffixName;   
-        System.out.println(filename);  
         //文件保存路径  
         try {
 			file.transferTo(new File(localPath+filename));

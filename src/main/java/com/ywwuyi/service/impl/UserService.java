@@ -151,5 +151,10 @@ public class UserService implements IUserService {
 	public List<Map<String, String>> getAllOrder() {
 		return this.orderDao.selectAllOrder();
 	}
+
+	@Override
+	public Book getBookById(Integer bookid) {
+		return this.bookDao.selectByPrimaryKey(bookid);
+	}
 }
 
