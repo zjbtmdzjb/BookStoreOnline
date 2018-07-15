@@ -2,6 +2,7 @@ package com.ywwuyi.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ywwuyi.service.*;
+import com.alibaba.fastjson.JSONArray;
 import com.ywwuyi.domain.*;
 
 @CrossOrigin
@@ -45,6 +47,60 @@ public class BookController {
     	String id = map.get("id");
     	int i = Integer.parseInt(id);
     	return this.userService.bookDelete(i);
+    }
+    
+    @RequestMapping(value = "Bookcommit.action", method = RequestMethod.POST)
+    @ResponseBody
+    public Bookcommit review(@RequestBody Map<String,String> map) {
+    	String id = map.get("id");
+    	String userid = map.get("userid");
+    	String bookid = map.get("bookid");
+    	String commitmessage = map.get("commitmessage");
+    	Bookcommit regis = new Bookcommit();
+    	int i = Integer.parseInt(id);
+    	int ui = Integer.parseInt(userid);
+    	int bi = Integer.parseInt(bookid);
+    	Date nowDate = new Date();
+    	regis.setId(i);
+    	regis.setUserid(ui);
+    	regis.setBookid(bi);
+    	regis.setCommitmessage(commitmessage);
+    	regis.setDate(nowDate);
+    	return this.userService.bookcommitInsert(regis);
+    }
+    
+    @RequestMapping(value = "selectBookcommit.action", method = RequestMethod.POST)
+    @ResponseBody
+    public Bookcommit selectbookcommit(@RequestBody Map<String,String> map) {
+    	String bookid = map.get("bookid");
+    	int i = Integer.parseInt(bookid);
+    	return this.userService.getBookcommitByBookcommitId(i);
+    }
+    
+    @RequestMapping(value = "deleteBookcommit.action",method = RequestMethod.POST)
+    @ResponseBody
+    public Integer deletecommit(@RequestBody Map<String,String> map) {
+    	String id = map.get("id");
+    	int i = Integer.parseInt(id);
+    	return this.userService.bookcommitDelete(i);
+    }
+    
+    @RequestMapping(value = "selectBookname.action", method = RequestMethod.POST)
+    @ResponseBody
+    public String selectbookname(@RequestBody Map<String,String> map) {
+    	String bookname = map.get("bookname");
+    	List<Map<String,String>> lists = this.userService.getBookByBookName(bookname);
+    	String jsonStr = JSONArray.toJSONString(lists);
+    	return jsonStr;
+    }
+    
+    @RequestMapping(value = "selectBooktype.action", method = RequestMethod.POST)
+    @ResponseBody
+    public String selectbooktype(@RequestBody Map<String,String> map) {
+    	String type = map.get("type");
+    	List<Map<String,String>> lists = this.userService.getBookByBookType(type);
+    	String jsonStr = JSONArray.toJSONString(lists);
+    	return jsonStr;
     }
     
     @RequestMapping(value = "addNewbook.action")
