@@ -2,7 +2,7 @@ package com.ywwuyi.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ywwuyi.service.*;
 import com.alibaba.fastjson.JSONArray;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ywwuyi.domain.*;
 
 @CrossOrigin
@@ -35,7 +36,7 @@ public class BookController {
 	@Autowired
     private IUserService userService;
     
-	@RequestMapping(value = "booklist",method = RequestMethod.GET)
+	@RequestMapping(value = "booklist",method = RequestMethod.GET,produces = { "application/json;charset=UTF-8" })
     @ResponseBody
     public String  userList(HttpSession httpSession) {
     	List<Map<String,String>> lists = this.userService.getAllBook();
@@ -43,7 +44,7 @@ public class BookController {
     	return jsonStr;
     }
     
-    @RequestMapping(value = "deleteBook.action",method = RequestMethod.POST)
+    @RequestMapping(value = "deleteBook.action",method = RequestMethod.POST,produces = { "application/json;charset=UTF-8" })
     @ResponseBody
     public Integer delete(@RequestBody Map<String,String> map) {
     	String id = map.get("id");
@@ -51,7 +52,7 @@ public class BookController {
     	return this.userService.bookDelete(i);
     }
     
-    @RequestMapping(value = "Bookcommit.action", method = RequestMethod.POST)
+    @RequestMapping(value = "Bookcommit.action", method = RequestMethod.POST,produces = { "application/json;charset=UTF-8" })
     @ResponseBody
     public Bookcommit review(@RequestBody Map<String,String> map) {
     	String id = map.get("id");
@@ -62,7 +63,7 @@ public class BookController {
     	int i = Integer.parseInt(id);
     	int ui = Integer.parseInt(userid);
     	int bi = Integer.parseInt(bookid);
-    	Date nowDate = new Date();
+    	Date nowDate = new Date(System.currentTimeMillis());
     	regis.setId(i);
     	regis.setUserid(ui);
     	regis.setBookid(bi);
@@ -71,7 +72,7 @@ public class BookController {
     	return this.userService.bookcommitInsert(regis);
     }
     
-    @RequestMapping(value = "selectBookcommit.action", method = RequestMethod.POST)
+    @RequestMapping(value = "selectBookcommit.action", method = RequestMethod.POST,produces = { "application/json;charset=UTF-8" })
     @ResponseBody
     public Bookcommit selectbookcommit(@RequestBody Map<String,String> map) {
     	String bookid = map.get("bookid");
@@ -79,7 +80,7 @@ public class BookController {
     	return this.userService.getBookcommitByBookcommitId(i);
     }
     
-    @RequestMapping(value = "deleteBookcommit.action",method = RequestMethod.POST)
+    @RequestMapping(value = "deleteBookcommit.action",method = RequestMethod.POST,produces = { "application/json;charset=UTF-8" })
     @ResponseBody
     public Integer deletecommit(@RequestBody Map<String,String> map) {
     	String id = map.get("id");
@@ -87,7 +88,7 @@ public class BookController {
     	return this.userService.bookcommitDelete(i);
     }
     
-    @RequestMapping(value = "selectBookname.action", method = RequestMethod.POST)
+    @RequestMapping(value = "selectBookname.action", method = RequestMethod.POST,produces = { "application/json;charset=UTF-8" })
     @ResponseBody
     public String selectbookname(@RequestBody Map<String,String> map) {
     	String bookname = map.get("bookname");
@@ -96,7 +97,7 @@ public class BookController {
     	return jsonStr;
     }
     
-    @RequestMapping(value = "selectBooktype.action", method = RequestMethod.POST)
+    @RequestMapping(value = "selectBooktype.action", method = RequestMethod.POST,produces = { "application/json;charset=UTF-8" })
     @ResponseBody
     public String selectbooktype(@RequestBody Map<String,String> map) {
     	String type = map.get("type");
@@ -105,40 +106,24 @@ public class BookController {
     	return jsonStr;
     }
     
-    @RequestMapping(value = "addNewbook.action")
+    @RequestMapping(value = "addNewbook.action",produces = { "application/json;charset=UTF-8" })
     @ResponseBody
-    public Book addNewbook(Book book, HttpServletRequest request) {
-    	//保存数据库的路径  
-        String sqlPath = null;
-        //定义文件保存的本地路径  
-        String localPath= request.getSession().getServletContext().getRealPath("/img");
-        //定义 文件名  
-        String filename=null;        
-        //生成uuid作为文件名称    
-        String uuid = UUID.randomUUID().toString().replaceAll("-","");    
-        //获得文件类型（可以判断如果不是图片，禁止上传）    
-        String contentType = book.getFile().getContentType();
-        //获得文件后缀名   
-        String suffixName = contentType.substring(contentType.indexOf("/")+1);  
-        //得到 文件名  
-        filename=uuid+"."+suffixName;   
-        System.out.println(filename);  
-        //文件保存路径  
-        try {
-			book.getFile().transferTo(new File(localPath+filename));
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}   
-        
-        //把图片的相对路径保存至数据库  
-        sqlPath = "/img/"+filename;  
-        System.out.println(sqlPath);
-        book.setImage(sqlPath);  
- //       userService
- //       model.addAttribute("user", user);  
- //       return "MyJsp";  
+    public Book addNewbook(@RequestBody Map<String,String> map) {
+    	String bookname = map.get("bookname");
+    	String type = map.get("type");
+    	String presentation = map.get("presentation");
+    	String cost = map.get("cost");
+    	String image = map.get("image");
+    	Book book = new Book();
+    	String sql_path = "/img/"+image;
+    	Date sql_date = new Date(System.currentTimeMillis());
+    	book.setDate(sql_date);
+    	book.setImage(sql_path);
+    	book.setBookname(bookname);
+    	book.setCost(Double.parseDouble(cost));
+    	book.setType(type);
+    	book.setPresentation(presentation);
+    	this.userService.bookInsert(book);
         return book;
     }
     
@@ -147,8 +132,6 @@ public class BookController {
     @RequestMapping(value = "uploadimg.action",produces = { "application/json;charset=UTF-8" })
     @ResponseBody
     public String uploadImg(MultipartFile file, HttpServletRequest request) {
-    	//保存数据库的路径  
-        String sqlPath = null;   
         //定义文件保存的本地路径  
         String localPath= request.getSession().getServletContext().getRealPath("/img/");
         //定义 文件名  
@@ -171,13 +154,6 @@ public class BookController {
 			e.printStackTrace();
 		}   
         
-        //把图片的相对路径保存至数据库  
-//        sqlPath = "/img/"+filename;  
-//       System.out.println(sqlPath);
- //       book.setImage(sqlPath);  
- //       userService
- //       model.addAttribute("user", user);  
- //       return "MyJsp";  
         return filename;
     }
 

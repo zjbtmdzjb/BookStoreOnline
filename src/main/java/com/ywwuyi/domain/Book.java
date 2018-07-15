@@ -4,6 +4,9 @@ import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Book {
     private Integer id;
 
@@ -15,6 +18,7 @@ public class Book {
 
     private String type;
 
+    @JSONField (format="yyyy-MM-dd")  
     private Date date;
 
     private Double cost;
