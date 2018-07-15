@@ -56,7 +56,7 @@ public class UserController {
     
     }
     
-    @RequestMapping(value = "userlist",method = RequestMethod.POST,produces = { "application/json;charset=UTF-8" })
+    @RequestMapping(value = "userlist",method = RequestMethod.GET,produces = { "application/json;charset=UTF-8" })
     @ResponseBody
     public String userList(HttpSession httpSession) {
     	List<Map<String, String>> lists =  this.userService.getAllUser();

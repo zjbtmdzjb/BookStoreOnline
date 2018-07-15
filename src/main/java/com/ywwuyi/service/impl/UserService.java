@@ -23,6 +23,8 @@ public class UserService implements IUserService {
     private BookMapper bookDao;
     @Autowired
     private BookcommitMapper bookcommitDao;
+    @Autowired
+    private IntroduceMapper introduceDao;
 
     public User getUserById(int userId) {
         return this.userDao.selectByPrimaryKey(userId);
@@ -155,6 +157,11 @@ public class UserService implements IUserService {
 	@Override
 	public Book getBookById(Integer bookid) {
 		return this.bookDao.selectByPrimaryKey(bookid);
+	}
+
+	@Override
+	public List<Map<String, String>> getAllIntroduce() {
+		return this.introduceDao.selectAll();
 	}
 }
 

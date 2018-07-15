@@ -3,6 +3,7 @@ package com.ywwuyi.controller;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ywwuyi.service.*;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ywwuyi.domain.*;
 
@@ -112,6 +115,23 @@ public class BookController {
     	String id = map.get("id");
     	Book book = this.userService.getBookById(Integer.parseInt(id));
     	return book;
+    }
+    
+    @RequestMapping(value = "getIntroduce", produces = { "application/json;charset=UTF-8" })
+    @ResponseBody
+    public String getIntroduce() {
+    	List<Map<String,String>> lists = this.userService.getAllIntroduce();
+    	List<Book> books = new ArrayList<Book>();
+    	String jsonStr = JSONArray.toJSONString(lists);
+    	JSONArray jsonArray = JSON.parseArray(jsonStr);
+    	//遍历方式2
+        for (Object obj : jsonArray) {
+            JSONObject jsonObject = (JSONObject) obj;
+            books.add(this.userService.getBookById(Integer.parseInt(jsonObject.getString("bookid"))));
+        }
+        JSONArray array= JSONArray.parseArray(JSON.toJSONString(books));
+        String bookJsonStr = JSONArray.toJSONString(array);
+    	return bookJsonStr;
     }
     
     @RequestMapping(value = "addNewbook.action",produces = { "application/json;charset=UTF-8" })
