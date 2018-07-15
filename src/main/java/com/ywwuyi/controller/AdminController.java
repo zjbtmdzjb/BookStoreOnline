@@ -1,6 +1,7 @@
 package com.ywwuyi.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -37,5 +38,10 @@ public class AdminController {
     	return admin;
     }
     
-
+    @RequestMapping(value = "adminlist",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Map<String,String>> adminList(HttpSession httpSession) {
+    	return this.userService.getAllAdmin();
+    }
+    
 }

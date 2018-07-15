@@ -11,8 +11,11 @@ public interface IUserService {
 	
 	public Admin getAdminByAdminname(String adminname);
 	
+	public List<Map<String,String>> getAllAdmin();
+	
 	public User getUserByUsername(String username);
 	
+	public List<Map<String,String>> getAllUser();
 
 	public Admin adminLogin(@Param("adminname")String adminname, @Param("password")String password);
 
@@ -39,6 +42,8 @@ public interface IUserService {
 	public List<Map<String,String>> getBookByBookName(String bookname);
 	
 	public List<Map<String,String>> getBookByBookType(String type);
+	
+	public List<Map<String,String>> getAllBook();
 
 	public Order orderInsert(Order order);
 	

@@ -136,5 +136,20 @@ public class UserService implements IUserService {
 	public Integer sum(Integer userid) {
 		return this.orderDao.sum(userid);
 	}
+
+	@Override
+	public List<Map<String, String>> getAllAdmin() {
+		return this.adminDao.selectAllAdmin();
+	}
+
+	@Override
+	public List<Map<String, String>> getAllUser() {
+		return this.userDao.selectAllUser();
+	}
+
+	@Override
+	public List<Map<String, String>> getAllBook() {
+		return this.bookDao.selectAllBook();
+	}
 }
 
