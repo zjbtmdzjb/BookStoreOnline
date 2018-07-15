@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ywwuyi.service.*;
+import com.alibaba.fastjson.JSONArray;
 import com.ywwuyi.domain.*;
 
 @CrossOrigin
@@ -38,6 +39,7 @@ public class AdminController {
     	return admin;
     }
     
+
     @RequestMapping(value = "deleteAdmin.action",method = RequestMethod.POST)
     @ResponseBody
     public Integer delete(@RequestBody Map<String,String> map) {
@@ -47,10 +49,19 @@ public class AdminController {
     }
     
 
-    @RequestMapping(value = "adminlist",method = RequestMethod.GET)
+    @RequestMapping(value = "Adminlist",method = RequestMethod.GET)
     @ResponseBody
-    public List<Map<String,String>> adminList(HttpSession httpSession) {
-    	return this.userService.getAllAdmin();
+    public String  userList(HttpSession httpSession) {
+    	List<Map<String,String>> lists = this.userService.getAllAdmin();
+    	String jsonStr = JSONArray.toJSONString(lists);
+    	return jsonStr;
     }
     
+    @RequestMapping(value = "orderlist",method = RequestMethod.POST,produces = { "application/json;charset=UTF-8" })
+    @ResponseBody
+    public String userList(@RequestBody Map<String,String> map) {
+    	List<Map<String, String>> lists = this.userService.getAllOrder();
+    	String jsonStr = JSONArray.toJSONString(lists);
+    	return jsonStr;
+    }
 }

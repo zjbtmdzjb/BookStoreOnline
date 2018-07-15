@@ -35,10 +35,12 @@ public class BookController {
 	@Autowired
     private IUserService userService;
     
-    @RequestMapping(value = "booklist",method = RequestMethod.GET)
+	@RequestMapping(value = "booklist",method = RequestMethod.GET)
     @ResponseBody
-    public List<Map<String, String>> bookList(HttpSession httpSession) {
-    	return this.userService.getAllBook();
+    public String  userList(HttpSession httpSession) {
+    	List<Map<String,String>> lists = this.userService.getAllBook();
+    	String jsonStr = JSONArray.toJSONString(lists);
+    	return jsonStr;
     }
     
     @RequestMapping(value = "deleteBook.action",method = RequestMethod.POST)
@@ -107,7 +109,7 @@ public class BookController {
     @ResponseBody
     public Book addNewbook(Book book, HttpServletRequest request) {
     	//保存数据库的路径  
-        String sqlPath = null;   
+        String sqlPath = null;
         //定义文件保存的本地路径  
         String localPath= request.getSession().getServletContext().getRealPath("/src/main/webapp/img");
         //定义 文件名  
@@ -139,5 +141,13 @@ public class BookController {
  //       return "MyJsp";  
         return book;
     }
-
+    
+    @RequestMapping(value = "showOrder",method = RequestMethod.GET)
+    @ResponseBody
+    public Order test(HttpSession httpSession) {
+    	int bookid = 1;
+        Order order = this.userService.getOrderByBookId(bookid);
+        return order;
+    }
+    
 }

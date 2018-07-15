@@ -109,8 +109,8 @@ public class UserService implements IUserService {
 		return order;
 	}
 	
-	public Order getOrderByBookId(Integer bookid) {
-		return this.orderDao.selectByBookId(bookid);
+	public List<Map<String,String>> getOrderByUserId(Integer userid) {
+		return this.orderDao.selectByUserId(userid);
 	}
 
 	@Override
@@ -133,11 +133,6 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public Integer sum(Integer userid) {
-		return this.orderDao.sum(userid);
-	}
-
-	@Override
 	public List<Map<String, String>> getAllAdmin() {
 		return this.adminDao.selectAllAdmin();
 	}
@@ -150,6 +145,11 @@ public class UserService implements IUserService {
 	@Override
 	public List<Map<String, String>> getAllBook() {
 		return this.bookDao.selectAllBook();
+	}
+
+	@Override
+	public List<Map<String, String>> getAllOrder() {
+		return this.orderDao.selectAllOrder();
 	}
 }
 

@@ -47,7 +47,9 @@ public interface IUserService {
 
 	public Order orderInsert(Order order);
 	
-	public Order getOrderByBookId(Integer bookid);
+	public List<Map<String,String>> getOrderByUserId(Integer userid);
+	
+	public List<Map<String,String>> getAllOrder();
 
 	public Integer bookUpdata(Book record);
 	
@@ -55,5 +57,4 @@ public interface IUserService {
 	
 	public Integer orderUpdata(Order record);
 	
-	public Integer sum(Integer userid);
 }

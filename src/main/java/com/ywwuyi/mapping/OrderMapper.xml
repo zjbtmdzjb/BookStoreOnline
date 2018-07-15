@@ -13,36 +13,35 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from order
+    from orders
     where id = #{id,jdbcType=INTEGER}
   </select>
   
-  <select id="selectByBookId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
     <include refid="Base_Column_List" />
-    from order
-    where bookid = #{bookid,jdbcType=INTEGER}
-  </select>
-  
-  <select id="sum" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select sum(price)
-    <include refid="Base_Column_List" />
-    from order
+    from orders
     where userid = #{userid,jdbcType=INTEGER}
   </select>
   
+  <select id="selectAllOrder" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select all
+    <include refid="Base_Column_List" />
+    from orders
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from order
+    delete from orders
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ywwuyi.domain.Order" >
-    insert into order (id, bookid, userid, 
+    insert into orders (id, bookid, userid, 
       date)
     values (#{id,jdbcType=INTEGER}, #{bookid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
       #{date,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.ywwuyi.domain.Order" >
-    insert into order
+    insert into orders
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -73,7 +72,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.ywwuyi.domain.Order" >
-    update order
+    update orders
     <set >
       <if test="bookid != null" >
         bookid = #{bookid,jdbcType=INTEGER},
@@ -88,7 +87,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ywwuyi.domain.Order" >
-    update order
+    update orders
     set bookid = #{bookid,jdbcType=INTEGER},
       userid = #{userid,jdbcType=INTEGER},
       date = #{date,jdbcType=DATE}

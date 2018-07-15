@@ -53,9 +53,10 @@ public class UserController {
     	String id = map.get("id");
     	int i = Integer.parseInt(id);
     	return this.userService.userDelete(i);
+    
     }
     
-    @RequestMapping(value = "userlist",method = RequestMethod.GET,produces = { "application/json;charset=UTF-8" })
+    @RequestMapping(value = "userlist",method = RequestMethod.POST,produces = { "application/json;charset=UTF-8" })
     @ResponseBody
     public String userList(HttpSession httpSession) {
     	List<Map<String, String>> lists =  this.userService.getAllUser();
@@ -74,5 +75,15 @@ public class UserController {
     	regis.setPassword(password);
     	regis.setEmail(email);
     	return this.userService.userInsert(regis);
+    }
+    
+    @RequestMapping(value = "showOrder",method = RequestMethod.POST,produces = { "application/json;charset=UTF-8" })
+    @ResponseBody
+    public String userList(@RequestBody Map<String,String> map) {
+    	String userid = map.get("userid");
+    	int i = Integer.parseInt(userid);
+    	List<Map<String, String>> lists = this.userService.getOrderByUserId(i);
+    	String jsonStr = JSONArray.toJSONString(lists);
+    	return jsonStr;
     }
 }
