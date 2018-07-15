@@ -38,6 +38,12 @@
     </if>
   </select>
   
+  <select id="selectAllBook" resultMap="BaseResultMap" >
+    select all
+    <include refid="Base_Column_List" />
+    from book
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from book
     where id = #{id,jdbcType=INTEGER}

@@ -23,6 +23,12 @@
     where adminname = #{adminname,jdbcType=VARCHAR}
   </select>
   
+  <select id="selectAllAdmin" resultMap="BaseResultMap" >
+    select all
+    <include refid="Base_Column_List" />
+    from admin
+  </select>
+  
   <select id="selectByAdminnameAndPassword" resultMap="BaseResultMap" >
     select 
     <include refid="Base_Column_List" />

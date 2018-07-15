@@ -35,8 +35,8 @@ public class BookController {
     
     @RequestMapping(value = "booklist",method = RequestMethod.GET)
     @ResponseBody
-    public List<Map<String,Object>> bookList(HttpSession httpSession) {
-    	return null;
+    public List<Map<String, String>> bookList(HttpSession httpSession) {
+    	return this.userService.getAllBook();
     }
     
     @RequestMapping(value = "deleteBook.action",method = RequestMethod.POST)

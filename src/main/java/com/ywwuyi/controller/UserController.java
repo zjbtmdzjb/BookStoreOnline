@@ -1,6 +1,7 @@
 package com.ywwuyi.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -51,6 +52,12 @@ public class UserController {
     	String id = map.get("id");
     	int i = Integer.parseInt(id);
     	return this.userService.userDelete(i);
+    }
+    
+    @RequestMapping(value = "userlist",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Map<String,String>> userList(HttpSession httpSession) {
+    	return this.userService.getAllUser();
     }
     
     @RequestMapping(value = "userregister.action", method = RequestMethod.POST)

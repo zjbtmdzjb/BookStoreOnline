@@ -24,6 +24,12 @@
     where username = #{username,jdbcType=VARCHAR}
   </select>
   
+  <select id="selectAllUser" resultMap="BaseResultMap" >
+    select all
+    <include refid="Base_Column_List" />
+    from user
+  </select>
+  
   <select id="selectByUsernameAndPassword" resultMap="BaseResultMap" >
     select 
     <include refid="Base_Column_List" />
