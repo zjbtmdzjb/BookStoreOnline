@@ -111,7 +111,7 @@ public class BookController {
     	//保存数据库的路径  
         String sqlPath = null;
         //定义文件保存的本地路径  
-        String localPath= request.getSession().getServletContext().getRealPath("/src/main/webapp/img");
+        String localPath= request.getSession().getServletContext().getRealPath("/img");
         //定义 文件名  
         String filename=null;        
         //生成uuid作为文件名称    
@@ -133,7 +133,7 @@ public class BookController {
 		}   
         
         //把图片的相对路径保存至数据库  
-        sqlPath = "/src/main/webapp/img/"+filename;  
+        sqlPath = "/img/"+filename;  
         System.out.println(sqlPath);
         book.setImage(sqlPath);  
  //       userService
@@ -142,12 +142,43 @@ public class BookController {
         return book;
     }
     
-    @RequestMapping(value = "showOrder",method = RequestMethod.GET)
-    @ResponseBody
-    public Order test(HttpSession httpSession) {
-    	int bookid = 1;
-        Order order = this.userService.getOrderByBookId(bookid);
-        return order;
-    }
+
     
+    @RequestMapping(value = "uploadimg.action",produces = { "application/json;charset=UTF-8" })
+    @ResponseBody
+    public String uploadImg(MultipartFile file, HttpServletRequest request) {
+    	//保存数据库的路径  
+        String sqlPath = null;   
+        //定义文件保存的本地路径  
+        String localPath= request.getSession().getServletContext().getRealPath("/img/");
+        //定义 文件名  
+        String filename=null;        
+        //生成uuid作为文件名称    
+        String uuid = UUID.randomUUID().toString().replaceAll("-","");    
+        //获得文件类型（可以判断如果不是图片，禁止上传）    
+        String contentType = file.getContentType();
+        //获得文件后缀名   
+        String suffixName = contentType.substring(contentType.indexOf("/")+1);  
+        //得到 文件名  
+        filename=uuid+"."+suffixName;   
+        System.out.println(filename);  
+        //文件保存路径  
+        try {
+			file.transferTo(new File(localPath+filename));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}   
+        
+        //把图片的相对路径保存至数据库  
+//        sqlPath = "/img/"+filename;  
+//       System.out.println(sqlPath);
+ //       book.setImage(sqlPath);  
+ //       userService
+ //       model.addAttribute("user", user);  
+ //       return "MyJsp";  
+        return filename;
+    }
+
 }

@@ -49,10 +49,11 @@ public class AdminController {
     }
     
 
-    @RequestMapping(value = "Adminlist",method = RequestMethod.GET)
+
+    @RequestMapping(value = "adminlist",method = RequestMethod.GET,produces = { "application/json;charset=UTF-8" })
     @ResponseBody
-    public String  userList(HttpSession httpSession) {
-    	List<Map<String,String>> lists = this.userService.getAllAdmin();
+    public String adminList(HttpSession httpSession) {
+    	List<Map<String, String>> lists =  this.userService.getAllAdmin();
     	String jsonStr = JSONArray.toJSONString(lists);
     	return jsonStr;
     }
