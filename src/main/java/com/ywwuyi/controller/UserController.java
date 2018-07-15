@@ -86,4 +86,12 @@ public class UserController {
     	String jsonStr = JSONArray.toJSONString(lists);
     	return jsonStr;
     }
+    
+    @RequestMapping(value = "hh",method = RequestMethod.GET,produces = { "application/json;charset=UTF-8" })
+    @ResponseBody
+    public String bookList(HttpSession httpSession) {
+    	List<Map<String, String>> lists = this.userService.getBookByBookCost(15,20);
+    	String jsonStr = JSONArray.toJSONString(lists);
+    	return jsonStr;
+    }
 }

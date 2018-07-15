@@ -103,6 +103,10 @@ public class UserService implements IUserService {
 	public List<Map<String,String>> getBookByBookType(String type) {
 		return bookDao.selectByBookType(type);
 	}
+	
+	public List<Map<String,String>> getBookByBookCost(Integer min,Integer max) {
+		return bookDao.selectByBookCost(min,max);
+	}
 		
 	public Order orderInsert(Order order) {
 		this.orderDao.insert(order);
@@ -150,11 +154,6 @@ public class UserService implements IUserService {
 	@Override
 	public List<Map<String, String>> getAllOrder() {
 		return this.orderDao.selectAllOrder();
-	}
-
-	@Override
-	public Book getBookById(Integer bookid) {
-		return this.bookDao.selectByPrimaryKey(bookid);
 	}
 }
 
