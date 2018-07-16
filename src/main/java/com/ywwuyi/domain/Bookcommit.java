@@ -2,15 +2,20 @@ package com.ywwuyi.domain;
 
 import java.util.Date;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class Bookcommit {
     private Integer id;
 
     private Integer userid;
+    
+    private String username;
 
     private Integer bookid;
 
     private String commitmessage;
 
+    @JSONField (format="yyyy-MM-dd") 
     private Date date;
 
     public Integer getId() {
@@ -52,4 +57,12 @@ public class Bookcommit {
     public void setDate(Date date) {
         this.date = date;
     }
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }

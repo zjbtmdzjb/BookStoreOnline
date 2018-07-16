@@ -18,7 +18,7 @@ public interface BookMapper {
     
     List<Map<String,String>> selectByBookName(String bookname);
     
-    List<Map<String,String>> selectByBookType(String type);
+    List<Map<String,String>> selectByBookType(@Param("type")String type);
     
     List<Map<String,String>> selectAllBook();
     

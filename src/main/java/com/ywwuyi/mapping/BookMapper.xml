@@ -24,9 +24,7 @@
     select 
     <include refid="Base_Column_List" />
     from book
-    <if test="bookname != null and bookname != ''">
-    where bookname like "%"#{bookname,jdbcType=VARCHAR}"%"
-    </if>
+    where bookname like "%"#{bookname}"%"
   </select>
   
   <select id="selectByBookType" resultMap="BaseResultMap" parameterType="String" >
@@ -34,7 +32,7 @@
     <include refid="Base_Column_List" />
     from book
     <if test="type != null and type != ''">
-    where type like "%"#{type,jdbcType=VARCHAR}"%"
+    where type = #{type,jdbcType=VARCHAR}
     </if>
   </select>
   

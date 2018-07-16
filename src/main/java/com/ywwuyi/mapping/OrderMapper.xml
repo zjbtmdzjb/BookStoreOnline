@@ -4,11 +4,14 @@
   <resultMap id="BaseResultMap" type="com.ywwuyi.domain.Order" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="bookid" property="bookid" jdbcType="INTEGER" />
+    <result column="bookname" property="bookname" jdbcType="VARCHAR" />
     <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="cost" property="cost" jdbcType="DOUBLE" />
     <result column="date" property="date" jdbcType="DATE" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, bookid, userid, date
+    id, bookid, bookname, userid, username, cost, date
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -30,15 +33,22 @@
     from orders
   </select>
   
+  <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from orders
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from orders
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ywwuyi.domain.Order" >
-    insert into orders (id, bookid, userid, 
+    insert into orders (id, bookid, userid, bookname, username, cost,
       date)
     values (#{id,jdbcType=INTEGER}, #{bookid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
-      #{date,jdbcType=DATE})
+    #{bookname,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{cost,jdbcType=DOUBLE}, #{date,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.ywwuyi.domain.Order" >
     insert into orders

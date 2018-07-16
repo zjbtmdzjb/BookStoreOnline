@@ -4,12 +4,13 @@
   <resultMap id="BaseResultMap" type="com.ywwuyi.domain.Bookcommit" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="bookid" property="bookid" jdbcType="INTEGER" />
     <result column="commitmessage" property="commitmessage" jdbcType="VARCHAR" />
     <result column="date" property="date" jdbcType="DATE" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, userid, bookid, commitmessage, date
+    id, userid, username, bookid, commitmessage, date
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -30,9 +31,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ywwuyi.domain.Bookcommit" >
-    insert into bookcommit (id, userid, bookid, 
+    insert into bookcommit (id, userid, username, bookid, 
       commitmessage, date)
-    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{bookid,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{bookid,jdbcType=INTEGER}, 
       #{commitmessage,jdbcType=VARCHAR}, #{date,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.ywwuyi.domain.Bookcommit" >

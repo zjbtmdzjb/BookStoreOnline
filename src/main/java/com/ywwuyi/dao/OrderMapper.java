@@ -15,6 +15,8 @@ public interface OrderMapper {
     
     List<Map<String,String>> selectByUserId(Integer userid);
     
+    List<Map<String,String>> selectByUsername(String username);
+    
     List<Map<String,String>> selectAllOrder();
 
     int updateByPrimaryKeySelective(Order record);

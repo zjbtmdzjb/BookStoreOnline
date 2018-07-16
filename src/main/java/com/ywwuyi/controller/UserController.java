@@ -38,6 +38,14 @@ public class UserController {
         return admin;
     }
     
+    @RequestMapping(value = "getUserById.action",method = RequestMethod.POST,produces = { "application/json;charset=UTF-8" })
+    @ResponseBody
+    public User getUserByid(@RequestBody Map<String,String> map) {
+    	String username = map.get("username");
+    	User user = this.userService.getUserByUsername(username);
+    	return user;
+    }
+    
     @RequestMapping(value = "userlogin.action",method = RequestMethod.POST,produces = { "application/json;charset=UTF-8" })
     @ResponseBody
     public User login(@RequestBody Map<String,String> map) {
@@ -80,9 +88,8 @@ public class UserController {
     @RequestMapping(value = "showOrder",method = RequestMethod.POST,produces = { "application/json;charset=UTF-8" })
     @ResponseBody
     public String userList(@RequestBody Map<String,String> map) {
-    	String userid = map.get("userid");
-    	int i = Integer.parseInt(userid);
-    	List<Map<String, String>> lists = this.userService.getOrderByUserId(i);
+    	String username = map.get("username");
+    	List<Map<String, String>> lists = this.userService.getOrderByUsername(username);
     	String jsonStr = JSONArray.toJSONString(lists);
     	return jsonStr;
     }

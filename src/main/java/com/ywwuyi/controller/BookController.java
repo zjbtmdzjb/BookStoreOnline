@@ -55,32 +55,33 @@ public class BookController {
     	return this.userService.bookDelete(i);
     }
     
-    @RequestMapping(value = "Bookcommit.action", method = RequestMethod.POST,produces = { "application/json;charset=UTF-8" })
+    @RequestMapping(value = "bookCommit.action", method = RequestMethod.POST,produces = { "application/json;charset=UTF-8" })
     @ResponseBody
     public Bookcommit review(@RequestBody Map<String,String> map) {
-    	String id = map.get("id");
     	String userid = map.get("userid");
+    	String username = map.get("username");
     	String bookid = map.get("bookid");
     	String commitmessage = map.get("commitmessage");
     	Bookcommit regis = new Bookcommit();
-    	int i = Integer.parseInt(id);
     	int ui = Integer.parseInt(userid);
     	int bi = Integer.parseInt(bookid);
     	Date nowDate = new Date(System.currentTimeMillis());
-    	regis.setId(i);
     	regis.setUserid(ui);
+    	regis.setUsername(username);
     	regis.setBookid(bi);
     	regis.setCommitmessage(commitmessage);
     	regis.setDate(nowDate);
     	return this.userService.bookcommitInsert(regis);
     }
     
-    @RequestMapping(value = "selectBookcommit.action", method = RequestMethod.POST,produces = { "application/json;charset=UTF-8" })
+    @RequestMapping(value = "selectBookcommit.action",produces = { "application/json;charset=UTF-8" })
     @ResponseBody
-    public Bookcommit selectbookcommit(@RequestBody Map<String,String> map) {
+    public String selectbookcommit(@RequestBody Map<String,String> map) {
     	String bookid = map.get("bookid");
     	int i = Integer.parseInt(bookid);
-    	return this.userService.getBookcommitByBookcommitId(i);
+    	List<Map<String,String>> lists = this.userService.getBookcommitByBookId(i);
+    	String jsonStr = JSONArray.toJSONString(lists);
+    	return jsonStr;
     }
     
     @RequestMapping(value = "deleteBookcommit.action",method = RequestMethod.POST,produces = { "application/json;charset=UTF-8" })
@@ -91,7 +92,7 @@ public class BookController {
     	return this.userService.bookcommitDelete(i);
     }
     
-    @RequestMapping(value = "selectBookname.action", method = RequestMethod.POST,produces = { "application/json;charset=UTF-8" })
+    @RequestMapping(value = "selectBookname.action",produces = { "application/json;charset=UTF-8" })
     @ResponseBody
     public String selectbookname(@RequestBody Map<String,String> map) {
     	String bookname = map.get("bookname");
@@ -100,7 +101,7 @@ public class BookController {
     	return jsonStr;
     }
     
-    @RequestMapping(value = "selectBooktype.action", method = RequestMethod.POST,produces = { "application/json;charset=UTF-8" })
+    @RequestMapping(value = "selectBooktype.action", produces = { "application/json;charset=UTF-8" })
     @ResponseBody
     public String selectbooktype(@RequestBody Map<String,String> map) {
     	String type = map.get("type");
@@ -111,16 +112,34 @@ public class BookController {
     
     @RequestMapping(value = "selectBookid.action", produces = { "application/json;charset=UTF-8" })
     @ResponseBody
-    public Book selectbookid(@RequestBody Map<String,String> map) {
+    public String selectbookid(@RequestBody Map<String,String> map) {
     	String id = map.get("id");
     	Book book = this.userService.getBookById(Integer.parseInt(id));
-    	return book;
+    	String jsonStr = JSONObject.toJSONString(book);
+    	return jsonStr;
     }
     
     @RequestMapping(value = "getIntroduce", produces = { "application/json;charset=UTF-8" })
     @ResponseBody
     public String getIntroduce() {
     	List<Map<String,String>> lists = this.userService.getAllIntroduce();
+    	List<Book> books = new ArrayList<Book>();
+    	String jsonStr = JSONArray.toJSONString(lists);
+    	JSONArray jsonArray = JSON.parseArray(jsonStr);
+    	//遍历方式2
+        for (Object obj : jsonArray) {
+            JSONObject jsonObject = (JSONObject) obj;
+            books.add(this.userService.getBookById(Integer.parseInt(jsonObject.getString("bookid"))));
+        }
+        JSONArray array= JSONArray.parseArray(JSON.toJSONString(books));
+        String bookJsonStr = JSONArray.toJSONString(array);
+    	return bookJsonStr;
+    }
+    
+    @RequestMapping(value = "getRecommend", produces = { "application/json;charset=UTF-8" })
+    @ResponseBody
+    public String getRecommend() {
+    	List<Map<String,String>> lists = this.userService.getAllRecommend();
     	List<Book> books = new ArrayList<Book>();
     	String jsonStr = JSONArray.toJSONString(lists);
     	JSONArray jsonArray = JSON.parseArray(jsonStr);
@@ -182,6 +201,27 @@ public class BookController {
 		}   
         
         return filename;
+    }
+    
+    @RequestMapping(value = "order.action", method = RequestMethod.POST)
+    @ResponseBody
+    public Order takeOrder(@RequestBody Map<String,String> map) {
+    	String cost = map.get("cost");
+    	String username = map.get("username");
+    	String userid = map.get("userid");
+    	String bookid = map.get("bookid");
+    	String bookname = map.get("bookname");
+    	Order regis = new Order();
+    	int ui = Integer.parseInt(userid);
+    	int bi = Integer.parseInt(bookid);
+    	Date sql_date = new Date(System.currentTimeMillis());
+    	regis.setUserid(ui);
+    	regis.setBookname(bookname);
+    	regis.setBookid(bi);
+    	regis.setUsername(username);
+    	regis.setDate(sql_date);
+    	regis.setCost(Double.parseDouble(cost));
+    	return this.userService.orderInsert(regis);
     }
 
 }

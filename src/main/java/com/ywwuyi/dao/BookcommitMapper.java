@@ -1,5 +1,8 @@
 package com.ywwuyi.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.ywwuyi.domain.Bookcommit;
 
 public interface BookcommitMapper {
@@ -11,7 +14,7 @@ public interface BookcommitMapper {
 
     Bookcommit selectByPrimaryKey(Integer id);
     
-    Bookcommit selectByBookId(Integer bookid);
+    List<Map<String,String>> selectByBookId(Integer bookid);
     
     int updateByPrimaryKeySelective(Bookcommit record);
 

@@ -2,13 +2,22 @@ package com.ywwuyi.domain;
 
 import java.util.Date;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class Order {
     private Integer id;
 
     private Integer bookid;
+    
+    private String bookname;
 
     private Integer userid;
+    
+    private String username;
 
+    private Double cost;
+    
+    @JSONField (format="yyyy-MM-dd") 
     private Date date;
 
     public Integer getId() {
@@ -42,4 +51,28 @@ public class Order {
     public void setDate(Date date) {
         this.date = date;
     }
+
+	public String getBookname() {
+		return bookname;
+	}
+
+	public void setBookname(String bookname) {
+		this.bookname = bookname;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Double getCost() {
+		return cost;
+	}
+
+	public void setCost(Double cost) {
+		this.cost = cost;
+	}
 }

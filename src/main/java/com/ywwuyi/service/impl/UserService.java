@@ -25,6 +25,8 @@ public class UserService implements IUserService {
     private BookcommitMapper bookcommitDao;
     @Autowired
     private IntroduceMapper introduceDao;
+    @Autowired
+    private RecommendMapper recommendDao;
 
     public User getUserById(int userId) {
         return this.userDao.selectByPrimaryKey(userId);
@@ -120,7 +122,7 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public Bookcommit getBookcommitByBookcommitId(Integer bookid) {
+	public List<Map<String,String>> getBookcommitByBookId(Integer bookid) {
 		return this.bookcommitDao.selectByBookId(bookid);
 	}
 	@Override
@@ -166,6 +168,16 @@ public class UserService implements IUserService {
 	@Override
 	public List<Map<String, String>> getAllIntroduce() {
 		return this.introduceDao.selectAll();
+	}
+
+	@Override
+	public List<Map<String, String>> getAllRecommend() {
+		return this.recommendDao.selectAll();
+	}
+
+	@Override
+	public List<Map<String, String>> getOrderByUsername(String username) {
+		return this.orderDao.selectByUsername(username);
 	}
 }
 

@@ -35,7 +35,7 @@ public interface IUserService {
 	
 	public Bookcommit bookcommitInsert(Bookcommit bookcommit);
 	
-	public Bookcommit getBookcommitByBookcommitId(Integer bookid);
+	public List<Map<String,String>> getBookcommitByBookId(Integer bookid);
 	
 	public Book bookInsert(Book book);
 	
@@ -51,6 +51,8 @@ public interface IUserService {
 	
 	public List<Map<String,String>> getOrderByUserId(Integer userid);
 	
+	public List<Map<String,String>> getOrderByUsername(String username);
+	
 	public List<Map<String,String>> getAllOrder();
 
 	public Integer bookUpdata(Book record);
@@ -60,6 +62,8 @@ public interface IUserService {
 	public Integer orderUpdata(Order record);
 
 	public List<Map<String, String>> getAllIntroduce();
+	
+	public List<Map<String, String>> getAllRecommend();
 
 	Book getBookById(Integer bookid);
 	

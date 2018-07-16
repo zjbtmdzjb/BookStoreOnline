@@ -1,5 +1,8 @@
 package com.ywwuyi.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.ywwuyi.domain.Recommend;
 
 public interface RecommendMapper {
@@ -14,4 +17,6 @@ public interface RecommendMapper {
     int updateByPrimaryKeySelective(Recommend record);
 
     int updateByPrimaryKey(Recommend record);
+    
+    List<Map<String,String>> selectAll();
 }
